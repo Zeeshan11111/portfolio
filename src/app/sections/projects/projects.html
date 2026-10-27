@@ -1,0 +1,102 @@
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head" appReveal>
+      <span class="eyebrow">Selected work</span>
+      <h2 class="h-sec">Projects I've shipped.</h2>
+      <p class="lead">Products used by real teams, plus a few web tools I built and run myself.</p>
+    </div>
+
+    <div class="stack" #stack>
+      @for (p of projects; track p.title; let i = $index) {
+        <article class="card tile" [style.--i]="i" [style.--pc]="p.color">
+          <div class="info">
+            <div class="top">
+              <span class="num">0{{ i + 1 }}</span>
+              <span class="meta">{{ p.meta }} · {{ p.year }}</span>
+            </div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+            <div class="chips">@for (t of p.tags; track t) { <span class="chip">{{ t }}</span> }</div>
+            @if (p.link) {
+              <a class="btn btn-sm visit" [href]="p.link" target="_blank" rel="noopener">Visit site <app-icon name="arrow-up-right" [size]="14" [stroke]="2" /></a>
+            }
+          </div>
+
+          <div class="visual" aria-hidden="true">
+            <div class="window">
+              <div class="chrome"><i></i><i></i><i></i><span class="url"></span></div>
+              @switch (p.visual) {
+                @case ('dashboard') {
+                  <svg viewBox="0 0 600 340">
+                    <rect x="0" y="0" width="120" height="340" class="side" />
+                    <rect x="20" y="22" width="26" height="26" rx="8" class="a" />
+                    <rect x="54" y="30" width="48" height="10" rx="5" class="ink" />
+                    @for (y of [80, 110, 140, 170, 200]; track y) {
+                      <rect x="20" [attr.y]="y" width="80" height="20" rx="6" [attr.class]="y === 80 ? 'a-soft' : 'none'" />
+                      <rect x="30" [attr.y]="y + 7" [attr.width]="y === 80 ? 56 : 46" height="6" rx="3" class="ink faint" />
+                    }
+                    @for (k of [0, 1, 2]; track k) {
+                      <rect [attr.x]="140 + k * 150" y="22" width="138" height="72" rx="12" class="tile-s" />
+                      <rect [attr.x]="156 + k * 150" y="38" width="50" height="7" rx="3" class="ink faint" />
+                      <rect [attr.x]="156 + k * 150" y="56" [attr.width]="[70, 56, 64][k]" height="14" rx="4" class="ink" />
+                    }
+                    <rect x="140" y="108" width="438" height="210" rx="12" class="tile-s" />
+                    <rect x="156" y="124" width="90" height="8" rx="4" class="ink" />
+                    <path d="M156 290 C 200 270, 220 230, 260 236 S 320 270, 360 220 S 430 180, 470 196 S 530 150, 562 140 L562 302 L156 302 Z" class="area" />
+                    <path pathLength="1" d="M156 290 C 200 270, 220 230, 260 236 S 320 270, 360 220 S 430 180, 470 196 S 530 150, 562 140" class="line" />
+                    <circle cx="470" cy="196" r="5" class="a" />
+                  </svg>
+                }
+                @case ('workforce') {
+                  <svg viewBox="0 0 600 340">
+                    <rect x="24" y="20" width="200" height="14" rx="7" class="ink" />
+                    <rect x="476" y="16" width="100" height="24" rx="12" class="a" />
+                    @for (r of [0, 1, 2, 3]; track r) {
+                      <rect x="24" [attr.y]="60 + r * 68" width="552" height="56" rx="12" class="tile-s" />
+                      <circle cx="56" [attr.cy]="88 + r * 68" r="16" [attr.class]="r % 2 ? 'a-soft' : 'a'" />
+                      <rect x="84" [attr.y]="78 + r * 68" [attr.width]="[130, 110, 150, 120][r]" height="9" rx="4" class="ink" />
+                      <rect x="84" [attr.y]="93 + r * 68" width="80" height="6" rx="3" class="ink faint" />
+                      <rect x="476" [attr.y]="78 + r * 68" width="80" height="20" rx="10" [attr.class]="r === 2 ? 'warn' : 'ok'" />
+                    }
+                  </svg>
+                }
+                @case ('converter') {
+                  <svg viewBox="0 0 600 340">
+                    <rect x="40" y="30" width="520" height="280" rx="18" class="drop" />
+                    <g transform="translate(150 100)">
+                      <path d="M0 12a12 12 0 0 1 12-12h62l30 30v98a12 12 0 0 1-12 12H12A12 12 0 0 1 0 128z" class="tile-s" />
+                      <text x="52" y="86" text-anchor="middle" class="ft">PDF</text>
+                    </g>
+                    <g transform="translate(300 170)" class="hop">
+                      <circle r="26" class="a" />
+                      <path d="M-10 0h20m-7-7 7 7-7 7" class="arrow-w" />
+                    </g>
+                    <g transform="translate(346 100)">
+                      <path d="M0 12a12 12 0 0 1 12-12h62l30 30v98a12 12 0 0 1-12 12H12A12 12 0 0 1 0 128z" class="tile-s" />
+                      <text x="52" y="86" text-anchor="middle" class="ft">DOCX</text>
+                    </g>
+                    <rect x="200" y="272" width="200" height="6" rx="3" class="track" />
+                    <rect x="200" y="272" width="200" height="6" rx="3" class="a prog" />
+                  </svg>
+                }
+                @case ('speed') {
+                  <svg viewBox="0 0 600 340">
+                    <path d="M180 250 A120 120 0 0 1 420 250" class="g-bg" />
+                    <path pathLength="1" d="M180 250 A120 120 0 0 1 390 170" class="g-fg" />
+                    <text x="300" y="232" text-anchor="middle" class="big">94.2</text>
+                    <text x="300" y="262" text-anchor="middle" class="unit">Mbps</text>
+                    @for (s of [['Ping', '12'], ['Jitter', '3'], ['Upload', '41']]; track s[0]; let k = $index) {
+                      <rect [attr.x]="120 + k * 128" y="282" width="112" height="40" rx="10" class="tile-s" />
+                      <text [attr.x]="136 + k * 128" y="306" class="unit">{{ s[0] }}</text>
+                      <text [attr.x]="216 + k * 128" y="307" text-anchor="end" class="val">{{ s[1] }}</text>
+                    }
+                  </svg>
+                }
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

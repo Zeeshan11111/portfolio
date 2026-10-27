@@ -1,0 +1,103 @@
+<section class="hero" id="home">
+  <div class="wrap bento">
+    <!-- Intro -->
+    <div class="tile t-intro pop spot" style="--i:0" appSpot>
+      @if (profile.available) {
+        <span class="badge"><span class="dot"></span>Available for new projects</span>
+      }
+      <h1>
+        Angular developer<br>building
+        <span class="flip" aria-hidden="true">
+          @for (w of words; track w; let i = $index) {
+            <span class="grad" [class.on]="i === wordIndex()" [class.off]="i === prevIndex()">{{ w }}</span>
+          }
+        </span>
+        <span class="sr">{{ words[0] }}</span><br>web apps.
+      </h1>
+      <p class="lead">{{ profile.lead }}</p>
+      <div class="ctas">
+        <a href="#contact" class="btn">Start a project <app-icon name="arrow-right" [size]="16" [stroke]="2" /></a>
+        <a href="#projects" class="btn btn-ghost">View my work</a>
+        @if (profile.cv) {
+          <a [href]="profile.cv" [attr.download]="profile.cv" class="cv-link">
+            <span class="cv-ic"><app-icon name="download" [size]="15" [stroke]="2.2" /></span>Download CV
+          </a>
+        }
+      </div>
+    </div>
+
+    <!-- Profile -->
+    <div class="tile t-profile pop spot lift" style="--i:1" appSpot>
+      <div class="p-top">
+        <div class="avatar"><span>{{ profile.initials }}</span></div>
+        <div class="socials">
+          @for (c of contacts; track c.label) {
+            <a [href]="c.href" [attr.target]="c.href.startsWith('http') ? '_blank' : null" rel="noopener" [attr.aria-label]="c.label">
+              <app-icon [name]="c.icon" [size]="16" />
+            </a>
+          }
+          @if (profile.cv) {
+            <a [href]="profile.cv" [attr.download]="profile.cv" class="cv" aria-label="Download CV" title="Download CV">
+              <app-icon name="download" [size]="16" [stroke]="2" />
+            </a>
+          }
+        </div>
+      </div>
+      <div class="who">
+        <b>{{ profile.name }}</b>
+        <span>{{ profile.role }}</span>
+        <span class="co"><app-icon name="briefcase" [size]="14" [stroke]="2" />{{ profile.company }}</span>
+      </div>
+    </div>
+
+    <!-- Currently building -->
+    <div class="tile t-now pop spot lift" style="--i:2" appSpot>
+      <div class="now-head">
+        <span class="label">Currently building</span>
+        <span class="live"><i></i>Live</span>
+      </div>
+      <b class="proj">{{ profile.currentProject }}</b>
+      <svg class="spark" viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="spark-fill" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#0071E3" stop-opacity=".25" />
+            <stop offset="1" stop-color="#0071E3" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <path class="area" d="M0 75 C 30 70, 45 50, 75 55 S 120 78, 150 52 S 205 25, 235 35 S 280 12, 300 15 L300 90 L0 90 Z" fill="url(#spark-fill)" />
+        <path class="line" pathLength="1" d="M0 75 C 30 70, 45 50, 75 55 S 120 78, 150 52 S 205 25, 235 35 S 280 12, 300 15" />
+      </svg>
+    </div>
+
+    <!-- Stats -->
+    @for (s of stats; track s.label; let i = $index) {
+      <div class="tile t-stat pop spot lift" [style.--i]="3 + i" appSpot>
+        <span class="s-ic"><app-icon [name]="statIcons[i]" [size]="18" [stroke]="1.9" /></span>
+        <b [appCountUp]="s.value" [suffix]="s.suffix">0</b>
+        <span>{{ s.label }}</span>
+      </div>
+    }
+
+    <!-- CTA -->
+    <a href="#contact" class="tile t-cta pop" style="--i:6">
+      <span>Have a project<br>in mind?</span>
+      <span class="go"><app-icon name="arrow-up-right" [size]="22" [stroke]="2" /></span>
+    </a>
+
+    <!-- Stack marquee -->
+    <div class="tile t-stack pop" style="--i:7">
+      <span class="label">Tech I use every day</span>
+      <div class="marquee">
+        @for (row of [0, 1]; track row) {
+          <div class="track" [class.rev]="row === 1">
+            @for (copy of [0, 1]; track copy) {
+              <div class="set" [attr.aria-hidden]="copy === 1 ? 'true' : null">
+                @for (m of (row === 0 ? stackA : stackB); track m) { <span class="chip">{{ m }}</span> }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

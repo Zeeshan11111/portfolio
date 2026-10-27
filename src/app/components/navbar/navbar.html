@@ -1,0 +1,48 @@
+<header class="pill" [class.scrolled]="scrolled()" [class.open]="menuOpen()">
+  <a href="#home" class="logo" (click)="closeMenu()" [attr.aria-label]="name + ', back to top'">
+    <span class="mark">{{ initials }}</span><span class="nm">{{ first }}</span>
+  </a>
+
+  <nav class="links" aria-label="Primary" #linksEl (mouseleave)="moveIndicator(null)">
+    <span class="indicator" #indicator aria-hidden="true"></span>
+    @for (link of links; track link.id) {
+      <a [href]="'#' + link.id" [class.active]="active() === link.id" [attr.data-id]="link.id"
+         (mouseenter)="moveIndicator($event.target)">{{ link.label }}</a>
+    }
+  </nav>
+
+  <div class="right">
+    <button class="theme" type="button" (click)="toggleTheme($event)"
+            [attr.aria-label]="theme.current() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'">
+      <span class="sun"><app-icon name="sun" [size]="17" [stroke]="2" /></span>
+      <span class="moon"><app-icon name="moon" [size]="16" [stroke]="2" /></span>
+    </button>
+    @if (cv) {
+      <a [href]="cv" [attr.download]="cv" class="cv-btn" title="Download CV">
+        <app-icon name="download" [size]="15" [stroke]="2.2" /><span>CV</span>
+      </a>
+    }
+    <a href="#contact" class="btn btn-sm cta">Hire me</a>
+    <button class="menu-btn" type="button" (click)="toggleMenu()"
+            [attr.aria-expanded]="menuOpen()" aria-controls="menu"
+            [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'">
+      <span class="burger"><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<div id="menu" class="drop" [class.open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''">
+  @for (link of links; track link.id; let i = $index) {
+    <a [href]="'#' + link.id" (click)="closeMenu()" [style.--d]="(menuOpen() ? 0.06 + i * 0.04 : 0) + 's'">
+      {{ link.label }} <app-icon name="arrow-right" [size]="18" [stroke]="2" />
+    </a>
+  }
+  <div class="drop-ctas">
+    @if (cv) {
+      <a [href]="cv" [attr.download]="cv" class="btn btn-ghost" (click)="closeMenu()">
+        <app-icon name="download" [size]="16" [stroke]="2" /> Download CV
+      </a>
+    }
+    <a href="#contact" class="btn" (click)="closeMenu()">Hire me</a>
+  </div>
+</div>
