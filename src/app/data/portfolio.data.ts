@@ -8,10 +8,10 @@ export interface Stat { value: number; suffix: string; label: string; }
 export interface Fact { icon: IconName; title: string; text: string; }
 export interface SkillBar { name: string; level: number; }
 export interface SkillGroup { icon: IconName; title: string; text: string; bars?: SkillBar[]; chips?: string[]; }
-export type ProjectVisual = 'dashboard' | 'workforce' | 'converter' | 'speed';
+export type ProjectVisual = 'dashboard' | 'workforce' | 'storefront' | 'api' | 'converter' | 'speed';
 export interface Project {
   title: string; meta: string; year: string; description: string; tags: string[];
-  visual: ProjectVisual; color: string; link?: string;
+  visual: ProjectVisual; color: string; link?: string; linkLabel?: string;
 }
 export interface Job { period: string; role: string; company: string; summary: string; points: string[]; }
 export interface ContactLink { icon: IconName; label: string; value: string; href: string; }
@@ -128,6 +128,17 @@ export const PROJECTS: Project[] = [
     tags: ['Angular', 'SCSS', 'Design system'],
   },
   {
+    title: 'STRYDE shoe store', meta: 'Personal project', year: 'E-commerce storefront', visual: 'storefront', color: '#FF2D55',
+    description: 'A fully responsive sneaker storefront with cart, wishlist, checkout and customer login, plus an admin panel with role-based access. Product pages are statically generated with SEO metadata and JSON-LD.',
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'SEO', 'Admin panel'],
+  },
+  {
+    title: 'Shoe store REST API', meta: 'Personal project', year: 'Backend API', visual: 'api', color: '#FF9F0A',
+    description: 'The backend for STRYDE: a REST API for products, orders, cart, wishlist and banners, with cookie-based session auth, admin roles and interactive Swagger docs.',
+    tags: ['Node.js', 'Express', 'Prisma', 'SQLite', 'Swagger'],
+    link: 'https://github.com/Zeeshan11111/shoe-store-api', linkLabel: 'View code',
+  },
+  {
     title: 'FileFlip converter', meta: 'Personal product', year: 'Web tool', visual: 'converter', color: '#FF6B3D',
     description: 'A fast file conversion site for PDF, Word, image and icon formats, with a focus on SEO, speed and a simple drag-and-drop flow.',
     tags: ['JavaScript', 'SEO', 'Static site'],
@@ -162,8 +173,8 @@ export const EXPERIENCE: Job[] = [
 
 export const CONTACTS: ContactLink[] = [
   { icon: 'mail', label: 'Email', value: 'zrasool753@gmail.com', href: 'mailto:zrasool753@gmail.com' },
-  { icon: 'linkedin', label: 'LinkedIn', value: 'linkedin.com/in/your-profile', href: 'https://www.linkedin.com/' },
-  { icon: 'github', label: 'GitHub', value: 'github.com/your-username', href: 'https://github.com/' },
+  { icon: 'linkedin', label: 'LinkedIn', value: 'linkedin.com/in/zeeshan-rasool-001a2b333', href: 'https://www.linkedin.com/in/zeeshan-rasool-001a2b333' },
+  { icon: 'github', label: 'GitHub', value: 'github.com/Zeeshan11111', href: 'https://github.com/Zeeshan11111' },
 ];
 
 export const NAV_LINKS = [

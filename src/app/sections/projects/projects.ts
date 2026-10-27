@@ -14,6 +14,25 @@ export class Projects {
   private readonly stackRef = viewChild.required<ElementRef<HTMLElement>>('stack');
   protected readonly projects = PROJECTS;
 
+  /** Illustrative content for the API mockup (routes mirror the shoe-store-api project). */
+  protected readonly endpoints = [
+    { m: 'GET', p: '/api/products', c: '#30D158' },
+    { m: 'POST', p: '/api/auth/login', c: '#0A84FF' },
+    { m: 'POST', p: '/api/cart', c: '#0A84FF' },
+    { m: 'GET', p: '/api/orders/track', c: '#30D158' },
+    { m: 'PATCH', p: '/api/orders/:id/status', c: '#FF9F0A' },
+    { m: 'DELETE', p: '/api/wishlist/:id', c: '#FF453A' },
+  ];
+  protected readonly jsonLines = [
+    { i: 0, k: '{', v: '' },
+    { i: 1, k: '"id": ', v: '"stryde-01",' },
+    { i: 1, k: '"name": ', v: '"Vector Runner",' },
+    { i: 1, k: '"price": ', v: '129,' },
+    { i: 1, k: '"sizes": ', v: '[40, 41, 42],' },
+    { i: 1, k: '"inStock": ', v: 'true' },
+    { i: 0, k: '}', v: '' },
+  ];
+
   constructor() {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {

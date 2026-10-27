@@ -18,7 +18,7 @@
             <p>{{ p.description }}</p>
             <div class="chips">@for (t of p.tags; track t) { <span class="chip">{{ t }}</span> }</div>
             @if (p.link) {
-              <a class="btn btn-sm visit" [href]="p.link" target="_blank" rel="noopener">Visit site <app-icon name="arrow-up-right" [size]="14" [stroke]="2" /></a>
+              <a class="btn btn-sm visit" [href]="p.link" target="_blank" rel="noopener">{{ p.linkLabel || 'Visit site' }} <app-icon name="arrow-up-right" [size]="14" [stroke]="2" /></a>
             }
           </div>
 
@@ -77,6 +77,52 @@
                     </g>
                     <rect x="200" y="272" width="200" height="6" rx="3" class="track" />
                     <rect x="200" y="272" width="200" height="6" rx="3" class="a prog" />
+                  </svg>
+                }
+                @case ('storefront') {
+                  <svg viewBox="0 0 600 340">
+                    <rect x="24" y="18" width="70" height="14" rx="7" class="ink" />
+                    @for (n of [0, 1, 2]; track n) {
+                      <rect [attr.x]="250 + n * 62" y="22" width="44" height="7" rx="3" class="ink faint" />
+                    }
+                    <circle cx="560" cy="25" r="13" class="tile-s" />
+                    <circle cx="570" cy="15" r="8" class="a badge" />
+                    @for (c of [0, 1, 2]; track c) {
+                      <g [attr.transform]="'translate(' + (24 + c * 188) + ' 56)'" class="shoe-card" [style.--k]="c">
+                        <rect width="176" height="264" rx="14" class="tile-s" />
+                        <rect x="12" y="12" width="152" height="130" rx="10" [attr.class]="c === 1 ? 'a-soft' : 'side'" />
+                        <g transform="translate(26 50)" class="shoe">
+                          <path d="M4 44 C 4 30, 18 26, 30 26 L 50 12 C 56 8, 64 10, 68 18 L 76 28 C 94 30, 116 34, 120 44 L 120 52 L 4 52 Z"
+                                [attr.class]="c === 1 ? 'a' : 'ink'" [attr.opacity]="c === 1 ? 1 : 0.8" />
+                          <rect x="2" y="50" width="120" height="8" rx="4" class="sole" />
+                          <path d="M40 30 l10 -8 M48 34 l10 -8 M56 38 l10 -8" class="lace" />
+                        </g>
+                        <rect x="12" y="160" width="110" height="10" rx="5" class="ink" />
+                        <rect x="12" y="180" width="70" height="7" rx="3" class="ink faint" />
+                        <rect x="12" y="214" width="54" height="14" rx="5" class="ink" />
+                        <rect x="112" y="208" width="52" height="28" rx="14" [attr.class]="c === 1 ? 'a' : 'ink'" [attr.opacity]="c === 1 ? 1 : 0.85" />
+                      </g>
+                    }
+                  </svg>
+                }
+                @case ('api') {
+                  <svg viewBox="0 0 600 340">
+                    <rect x="24" y="20" width="300" height="300" rx="14" class="tile-s" />
+                    @for (r of endpoints; track $index) {
+                      <g [attr.transform]="'translate(40 ' + (40 + $index * 46) + ')'" class="ep" [style.--k]="$index">
+                        <rect width="62" height="24" rx="7" [attr.fill]="r.c" opacity=".16" />
+                        <text x="31" y="16.5" text-anchor="middle" class="m" [attr.fill]="r.c">{{ r.m }}</text>
+                        <text x="76" y="17" class="path">{{ r.p }}</text>
+                      </g>
+                    }
+                    <rect x="344" y="20" width="232" height="300" rx="14" class="code-bg" />
+                    <circle cx="364" cy="40" r="5" fill="#FF5F57" /><circle cx="380" cy="40" r="5" fill="#FEBC2E" /><circle cx="396" cy="40" r="5" fill="#28C840" />
+                    <text x="364" y="76" class="res"><tspan class="g">200</tspan> OK · 42 ms</text>
+                    @for (l of jsonLines; track $index) {
+                      <text x="364" [attr.y]="106 + $index * 24" class="json" [style.--k]="$index">
+                        <tspan [attr.dx]="l.i * 14" class="j-key">{{ l.k }}</tspan><tspan class="j-val">{{ l.v }}</tspan>
+                      </text>
+                    }
                   </svg>
                 }
                 @case ('speed') {

@@ -67,6 +67,27 @@ svg { display: block; width: 100%; height: auto; }
 .unit { font-family: var(--sans); font-size: 13px; fill: var(--muted); }
 .val { font-family: var(--sans); font-size: 16px; font-weight: 600; fill: var(--text); }
 
+/* Storefront mockup */
+.sole { fill: var(--surface); stroke: var(--line-2); }
+.lace { fill: none; stroke: var(--surface); stroke-width: 2.5; stroke-linecap: round; opacity: .8; }
+.shoe { animation: bob 3.2s ease-in-out infinite; animation-delay: calc(var(--k, 0) * -.6s); }
+.badge { transform-box: fill-box; transform-origin: center; animation: pulse-b 2.4s ease-in-out infinite; }
+@keyframes bob { 0%, 100% { transform: translate(26px, 50px) rotate(-3deg); } 50% { transform: translate(26px, 40px) rotate(2deg); } }
+@keyframes pulse-b { 0%, 70%, 100% { transform: scale(1); } 80% { transform: scale(1.35); } }
+
+/* API mockup */
+.m { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; font-weight: 700; }
+.path { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; fill: var(--text); opacity: .85; }
+.ep { animation: ep-in 4.5s var(--ease) infinite backwards; animation-delay: calc(var(--k) * .12s); }
+@keyframes ep-in { 0% { opacity: 0; } 12%, 88% { opacity: 1; } 100% { opacity: 1; } }
+.code-bg { fill: #1D1D1F; }
+.res { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; fill: #A1A1A6; }
+.res .g { fill: #30D158; font-weight: 700; }
+.json { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; opacity: 0; animation: type-in 4.5s steps(1) infinite; animation-delay: calc(.6s + var(--k) * .22s); }
+.j-key { fill: #64D2FF; }
+.j-val { fill: #FFD60A; }
+@keyframes type-in { 0% { opacity: 0; } 4%, 90% { opacity: 1; } 100% { opacity: 0; } }
+
 @keyframes draw { 0% { stroke-dashoffset: 1; } 50%, 90% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
 @keyframes fill { 0% { transform: scaleX(0); } 70%, 100% { transform: scaleX(1); } }
 @keyframes hop { 0%, 100% { transform: translate(300px, 170px) scale(1); } 50% { transform: translate(300px, 170px) scale(1.12); } }
